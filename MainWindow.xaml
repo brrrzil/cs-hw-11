@@ -1,0 +1,85 @@
+﻿<Window x:Class="HW10.MainWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:HW10"
+        mc:Ignorable="d"
+        Title="MainWindow" Height="450" Width="820" MinHeight="350" MinWidth="820" MaxWidth="820">
+    <Grid ShowGridLines="False" MouseUp="ShowClientInfo">
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="86.675" MaxWidth="400"/>
+            <ColumnDefinition Width="313.325"/>
+            <ColumnDefinition Width="*" ScrollViewer.CanContentScroll="True"/>
+        </Grid.ColumnDefinitions>
+
+        <TextBlock Grid.Column="0" Text="Выберите пользователя"
+                   Margin="10,10,0,0" Width="170" Height="20"
+                   VerticalAlignment="Top" HorizontalAlignment="Left" Grid.ColumnSpan="2"/>
+
+        <ComboBox Grid.Column="1" x:Name="UserBox" 
+                  Margin="0,10,10,0" Width="200" Height="20"
+                  VerticalAlignment="Top" HorizontalAlignment="Right" SelectionChanged="AssignToUser"/>
+
+        <ListBox Grid.Column="0" Grid.RowSpan="2" x:Name="ClientList"
+                 Margin="10,40,10,10" Grid.ColumnSpan="2"></ListBox>
+
+        <TextBlock Grid.Column="2" Grid.Row="0" x:Name="ClientInfo"
+                   Margin="10,10,10,10"
+                   VerticalAlignment="Top" HorizontalAlignment="Left"/>
+
+        <TextBox Grid.Column="2" Grid.Row="1" x:Name="SecondNameField"
+                 Margin="10,10,0,0"
+                 Width="250" Height="20"
+                 VerticalAlignment="Top" HorizontalAlignment="Left"/>
+        <Button Grid.Column="2" Grid.Row="1" x:Name="SecondNameOk"
+                Margin="270,10,0,0"
+                Width="120" Height="20"
+                VerticalAlignment="Top" HorizontalAlignment="Left" Content="Изменить фамилию" Click="SetSecondName"/>
+
+        <TextBox Grid.Column="2" Grid.Row="1" x:Name="FirstNameField"
+                 Margin="10,40,0,0"
+                 Width="250" Height="20"
+                 VerticalAlignment="Top" HorizontalAlignment="Left"/>
+        <Button Grid.Column="2" Grid.Row="1" x:Name="FirstNameOk"
+                Margin="270,40,0,0"
+                Width="120" Height="20"
+                VerticalAlignment="Top" HorizontalAlignment="Left" Content="Изменить имя" Click="SetFirstName"/>
+
+        <TextBox Grid.Column="2" Grid.Row="1" x:Name="MiddleNameField"
+                 Margin="10,70,0,0"
+                 Width="250" Height="20"
+                 VerticalAlignment="Top" HorizontalAlignment="Left"/>
+        <Button Grid.Column="2" Grid.Row="1" x:Name="MiddleNameOk"
+                Margin="270,70,0,0"
+                Width="120" Height="20"
+                VerticalAlignment="Top" HorizontalAlignment="Left" Content="Изменить отчество" Click="SetMiddleName"/>
+
+        <TextBox Grid.Column="2" Grid.Row="1" x:Name="PhoneField"
+                 Margin="10,100,0,0"
+                 Width="250" Height="20"
+                 VerticalAlignment="Top" HorizontalAlignment="Left"/>
+        <Button Grid.Column="2" Grid.Row="1" x:Name="PhoneOk"
+                Margin="270,100,0,0"
+                Width="120" Height="20"
+                VerticalAlignment="Top" HorizontalAlignment="Left" Content="Изменить телефон" Click="SetPhone"/>
+
+        <TextBox Grid.Column="2" Grid.Row="1" x:Name="PassportField"
+                 Margin="10,130,0,0"
+                 Width="250" Height="20"
+                 VerticalAlignment="Top" HorizontalAlignment="Left"/>
+        <Button Grid.Column="2" Grid.Row="1" x:Name="PassportOk"
+                Margin="270,130,0,0"
+                Width="120" Height="20"
+                VerticalAlignment="Top" HorizontalAlignment="Left" Content="Изменить паспорт" Click="SetPassport"/>
+
+        <TextBlock Grid.Column="2" Grid.Row="1" x:Name="Log"
+                   HorizontalAlignment="Right" VerticalAlignment="Bottom"
+                   Margin="10,10,10,10"/>
+
+        <Grid.RowDefinitions>
+            <RowDefinition Height="150"></RowDefinition>
+            <RowDefinition></RowDefinition>
+        </Grid.RowDefinitions>
+    </Grid>
+</Window>
