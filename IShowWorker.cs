@@ -7,8 +7,8 @@ using System.Threading.Tasks;
 
 namespace HW10
 {
-    internal interface IShowClient
+    internal interface IShowWorker
     {
-        string ClientToString(Client client);
+        string WorkerToString(Worker worker);
     }
 }

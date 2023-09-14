@@ -21,7 +21,7 @@ namespace HW10
     /// </summary>
     public partial class MainWindow : Window
     {
-        IClientEditor user = new User();
+        IWorkerEditor user = new User();
 
         public MainWindow()
         {
@@ -31,23 +31,37 @@ namespace HW10
             User.AddUser("Консультант");
             User.AddUser("Менеджер");
             UserBox.ItemsSource = User.GetUsers();
+            Repository repository = new Repository();
 
-            // Заполняем репозиторий случайным количеством клиентов
-            Repository.FillRepository();
+            //Создаём отделы
+            Repository.Departments.Add(new Department(10));
+            Repository.Departments.Add(new Department(11));
+            Repository.Departments.Add(new Department(12));
 
-            // Выводим список клиентов в ListBox
-            ClientList.ItemsSource = Repository.clients;
+            //Выводим список департаментов в DepartmentBox
+            DepartmentBox.ItemsSource = Repository.Departments;
 
-            //userTest.Text = user.GetType().ToString();
+            //Делаем невидимой кнопки менеджера
+            ShowManagertFields(Visibility.Hidden);
         }
 
-        // По клику на клиенте выводим инфо в TextBox
-        private void ShowClientInfo(object sender, MouseButtonEventArgs e)
+        // По клику на департаменте выводим список сотрудников
+        private void ShowDepartmentWorkers(object sender, SelectionChangedEventArgs e)
         {
-            if (ClientList.SelectedIndex != -1)
+            if (DepartmentBox.SelectedIndex != -1)
             {
-                ClientInfo.Text = user.ClientToString(Repository.clients[ClientList.SelectedIndex]);
-                Log.Text = Repository.clients[ClientList.SelectedIndex].Log;
+                WorkerGrid.ItemsSource = Repository.Departments[DepartmentBox.SelectedIndex].WorkersList();
+            }
+        }
+        
+        // По клику на сотруднике выводим инфо в TextBox
+        private void ShowWorkerInfo(object sender, MouseButtonEventArgs e)
+        {
+            if (WorkerGrid.SelectedIndex != -1)
+            {
+                Worker worker = Repository.Departments[DepartmentBox.SelectedIndex].Dep[WorkerGrid.SelectedIndex];
+                WorkerInfo.Text = user.WorkerToString(worker);
+                Log.Text = worker.Log;
             }
         }
 
@@ -58,31 +72,33 @@ namespace HW10
             {
                 case "Консультант":
                     user = new Consultant();
-                    if (ClientList.SelectedIndex != -1) {ClientInfo.Text = user.ClientToString(Repository.clients[ClientList.SelectedIndex]);}
+                    ShowManagertFields(Visibility.Hidden);
                     break;
                 case "Менеджер":
                     user = new Manager();
-                    if (ClientList.SelectedIndex != -1) { ClientInfo.Text = user.ClientToString(Repository.clients[ClientList.SelectedIndex]); }
+                    ShowManagertFields(Visibility.Visible);
                     break;
             }
+            //if (WorkerGrid.SelectedIndex != -1) { WorkerInfo.Text = user.WorkerToString(worker); }
         }
 
         #region Методы изменения данных
         private void SetSecondName(object sender, RoutedEventArgs e)
         {
-            if (ClientList.SelectedIndex != -1)
+            if (WorkerGrid.SelectedIndex != -1)
             {
                 if (SecondNameField.Text != string.Empty)
                 {
-                    Client client = Repository.clients[ClientList.SelectedIndex];
+                    Worker worker = Repository.Departments[DepartmentBox.SelectedIndex].Dep[WorkerGrid.SelectedIndex];
                     String secondName = SecondNameField.Text;
-                    user.EditSecondName(client, secondName);
-                    ClientInfo.Text = user.ClientToString(client);
+                    user.EditSecondName(worker, secondName);
+                    WorkerInfo.Text = user.WorkerToString(worker);
 
-                    string before = client.SecondName;
+                    string before = worker.SecondName;
                     DateTime date = DateTime.Now;
-                    Log.Text = client.ShowClientLog(date, "Фамилию", user, SecondNameField.Text);
+                    Log.Text = worker.ShowWorkerLog(date, "Фамилию", user, SecondNameField.Text);
 
+                    WorkerGrid.ItemsSource = Repository.Departments[DepartmentBox.SelectedIndex].WorkersList();
                     SecondNameField.Clear();
                 }
                 else MessageBox.Show("Поле не должно быть пустым");
@@ -92,20 +108,21 @@ namespace HW10
 
         private void SetFirstName(object sender, RoutedEventArgs e)
         {
-            if (ClientList.SelectedIndex != -1)
+            if (WorkerGrid.SelectedIndex != -1)
             {
                 if (FirstNameField.Text != string.Empty)
                 {
-                    Client client = Repository.clients[ClientList.SelectedIndex];
+                    Worker worker = Repository.Departments[DepartmentBox.SelectedIndex].Dep[WorkerGrid.SelectedIndex];
                     String firstName = FirstNameField.Text;
 
-                    user.EditFirstName(client, firstName);
-                    ClientInfo.Text = user.ClientToString(client);
+                    user.EditFirstName(worker, firstName);
+                    WorkerInfo.Text = user.WorkerToString(worker);
 
-                    string before = client.FirstName;
+                    string before = worker.FirstName;
                     DateTime date = DateTime.Now;
-                    Log.Text = client.ShowClientLog(date, "Имя", user, FirstNameField.Text);
+                    Log.Text = worker.ShowWorkerLog(date, "Имя", user, FirstNameField.Text);
 
+                    WorkerGrid.ItemsSource = Repository.Departments[DepartmentBox.SelectedIndex].WorkersList();
                     FirstNameField.Clear();
                 }
                 else MessageBox.Show("Поле не должно быть пустым");
@@ -115,19 +132,20 @@ namespace HW10
 
         private void SetMiddleName(object sender, RoutedEventArgs e)
         {
-            if (ClientList.SelectedIndex != -1)
+            if (WorkerGrid.SelectedIndex != -1)
             {
                 if (MiddleNameField.Text != string.Empty)
                 {
-                    Client client = Repository.clients[ClientList.SelectedIndex];
+                    Worker worker = Repository.Departments[DepartmentBox.SelectedIndex].Dep[WorkerGrid.SelectedIndex];
                     String middleName = MiddleNameField.Text;
-                    user.EditMiddleName(client, middleName);
-                    ClientInfo.Text = user.ClientToString(client);
+                    user.EditMiddleName(worker, middleName);
+                    WorkerInfo.Text = user.WorkerToString(worker);
 
-                    string before = client.MiddleName;
+                    string before = worker.MiddleName;
                     DateTime date = DateTime.Now;
-                    Log.Text = client.ShowClientLog(date, "Отчество", user, MiddleNameField.Text);
+                    Log.Text = worker.ShowWorkerLog(date, "Отчество", user, MiddleNameField.Text);
 
+                    WorkerGrid.ItemsSource = Repository.Departments[DepartmentBox.SelectedIndex].WorkersList();
                     MiddleNameField.Clear();
                 }
                 else MessageBox.Show("Поле не должно быть пустым");
@@ -137,19 +155,21 @@ namespace HW10
 
         private void SetPhone(object sender, RoutedEventArgs e)
         {
-            if (ClientList.SelectedIndex != -1)
+            if (WorkerGrid.SelectedIndex != -1)
             {
                 if (PhoneField.Text != string.Empty)
                 {
-                    Client client = Repository.clients[ClientList.SelectedIndex];
+                    Department department = Repository.Departments[WorkerGrid.SelectedIndex];
+                    Worker worker = Repository.Departments[DepartmentBox.SelectedIndex].Dep[WorkerGrid.SelectedIndex];
                     String phone = PhoneField.Text;
-                    user.EditPhone(client, phone);
-                    ClientInfo.Text = user.ClientToString(client);
+                    user.EditPhone(worker, phone);
+                    WorkerInfo.Text = user.WorkerToString(worker);
 
-                    string before = client.Phone;
+                    string before = worker.Phone;
                     DateTime date = DateTime.Now;
-                    Log.Text = client.ShowClientLog(date, "Телефон", user, PhoneField.Text);
+                    Log.Text = worker.ShowWorkerLog(date, "Телефон", user, PhoneField.Text);
 
+                    WorkerGrid.ItemsSource = Repository.Departments[DepartmentBox.SelectedIndex].WorkersList();
                     PhoneField.Clear();
                 }
                 else MessageBox.Show("Поле не должно быть пустым");
@@ -159,19 +179,20 @@ namespace HW10
 
         private void SetPassport(object sender, RoutedEventArgs e)
         {
-            if (ClientList.SelectedIndex != -1)
+            if (WorkerGrid.SelectedIndex != -1)
             {
                 if (PassportField.Text != string.Empty)
                 {
-                    Client client = Repository.clients[ClientList.SelectedIndex];
+                    Worker worker = Repository.Departments[DepartmentBox.SelectedIndex].Dep[WorkerGrid.SelectedIndex];
                     String passport = PassportField.Text;
-                    user.EditPassport(client, passport);
-                    ClientInfo.Text = user.ClientToString(client);
+                    user.EditPassport(worker, passport);
+                    WorkerInfo.Text = user.WorkerToString(worker);
 
-                    string before = client.Passport;
+                    string before = worker.Passport;
                     DateTime date = DateTime.Now;
-                    Log.Text = client.ShowClientLog(date, "Данные паспорта", user, PassportField.Text);
+                    Log.Text = worker.ShowWorkerLog(date, "Данные паспорта", user, PassportField.Text);
 
+                    WorkerGrid.ItemsSource = Repository.Departments[DepartmentBox.SelectedIndex].WorkersList();
                     PassportField.Clear();
                 }
                 else MessageBox.Show("Поле не должно быть пустым");
@@ -179,5 +200,42 @@ namespace HW10
             else MessageBox.Show("Выберите клиента из списка");
         }
         #endregion
+
+        private void OpenCreateWindow(object sender, RoutedEventArgs e)
+        {
+            new CreateNewWorker().ShowDialog();
+        }
+
+        private void DeleteWorker(object sender, RoutedEventArgs e)
+        {
+            string sMessageBoxText = "Удалить сотрудника?";
+            string sCaption = "Предупреждение!";
+            MessageBoxButton btnMessageBox = MessageBoxButton.YesNo;
+            MessageBoxImage icnMessageBox = MessageBoxImage.Warning;
+            MessageBoxResult rsltMessageBox = MessageBox.Show(sMessageBoxText, sCaption, btnMessageBox, icnMessageBox);
+            switch (rsltMessageBox)
+            {
+                case MessageBoxResult.Yes:
+                    Worker worker = Repository.Departments[DepartmentBox.SelectedIndex].Dep[WorkerGrid.SelectedIndex];
+                    Repository.Departments[DepartmentBox.SelectedIndex].Dep.Remove(worker);
+                    WorkerGrid.ItemsSource = Repository.Departments[DepartmentBox.SelectedIndex].WorkersList();
+                    WorkerInfo.Text = "";                    
+                    break;
+            }            
+        }
+
+        private void ShowManagertFields(Visibility visibility)
+        {
+            OpenCreateWindowButton.Visibility = visibility;
+            DeleteWorkerButton.Visibility = visibility;
+            FirstNameField.Visibility = visibility;
+            FirstNameOk.Visibility = visibility;
+            SecondNameField.Visibility = visibility;
+            SecondNameOk.Visibility = visibility;
+            MiddleNameField.Visibility = visibility;
+            MiddleNameOk.Visibility = visibility;
+            PassportField.Visibility = visibility;
+            PassportOk.Visibility = visibility;
+        }
     }
 }

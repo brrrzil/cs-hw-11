@@ -6,45 +6,45 @@ using System.Threading.Tasks;
 
 namespace HW10
 {
-    internal class Manager : Consultant, IClientEditor, IShowClient
+    internal class Manager : Consultant, IWorkerEditor, IShowWorker
     {
         public Manager()
         {
-
+            
         }
 
-        public string ClientToString(Client client)
+        public string WorkerToString(Worker worker)
         {
-            return $"{client.ShowClient(client.FirstName, client.SecondName, client.MiddleName, client.Phone, client.Passport)}";
+            return $"{worker.ShowWorker(worker.FirstName, worker.SecondName, worker.MiddleName, worker.Phone, worker.Passport)}";
         }
 
         #region Методы изменений для Менеджера
-        public void EditFirstName(Client client, string clientFirstName)
+        public void EditFirstName(Worker worker, string workerFirstName)
         {
-            client.FirstName = clientFirstName;
+            worker.FirstName = workerFirstName;
         }
 
-        public void EditSecondName(Client client, string clientSecondName)
+        public void EditSecondName(Worker worker, string workerSecondName)
         {
-            client.SecondName = clientSecondName;
+            worker.SecondName = workerSecondName;
         }
 
-        public void EditMiddleName(Client client, string clientMiddleName)
+        public void EditMiddleName(Worker worker, string workerMiddleName)
         {
-            client.MiddleName = clientMiddleName;
+            worker.MiddleName = workerMiddleName;
         }
 
-        public void EditPhone(Client client, string clientPhone)
+        public void EditPhone(Worker worker, string workerPhone)
         {
-            client.Phone = clientPhone;
+            worker.Phone = workerPhone;
         }
 
-        public void EditPassport(Client client, string clientPassport)
+        public void EditPassport(Worker worker, string workerPassport)
         {
-            client.Passport = clientPassport;
+            worker.Passport = workerPassport;
         }
 
-        public string Log(Client client)
+        public string Log(Worker worker)
         {
             return "";
         }

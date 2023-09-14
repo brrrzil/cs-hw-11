@@ -1,0 +1,58 @@
+﻿<Window x:Class="HW10.CreateNewWorker"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:HW10"
+        mc:Ignorable="d"
+        Title="CreateNewWorker" Height="300" Width="400">
+    <Grid>
+        <TextBox x:Name="CreateSecondNameField"
+                 Margin="10,10,0,0"
+                 Width="250" Height="20"
+                 VerticalAlignment="Top" HorizontalAlignment="Left"/>
+        <TextBlock Text="Фамилия"
+                   Margin="270,10,0,0" Width="170" Height="20"
+                   VerticalAlignment="Top" HorizontalAlignment="Left"/>
+        
+        <TextBox x:Name="CreateFirstNameField"
+                 Margin="10,40,0,0"
+                 Width="250" Height="20"
+                 VerticalAlignment="Top" HorizontalAlignment="Left"/>
+        <TextBlock Text="Имя"
+                   Margin="270,40,0,0" Width="170" Height="20"
+                   VerticalAlignment="Top" HorizontalAlignment="Left"/>
+
+        <TextBox x:Name="CreateMiddleNameField"
+                 Margin="10,70,0,0"
+                 Width="250" Height="20"
+                 VerticalAlignment="Top" HorizontalAlignment="Left"/>
+        <TextBlock Text="Отчество"
+                   Margin="270,70,0,0" Width="170" Height="20"
+                   VerticalAlignment="Top" HorizontalAlignment="Left"/>
+
+        <TextBox x:Name="CreatePhoneField"
+                 Margin="10,100,0,0"
+                 Width="250" Height="20"
+                 VerticalAlignment="Top" HorizontalAlignment="Left"/>
+        <TextBlock Text="Телефон"
+                   Margin="270,100,0,0" Width="170" Height="20"
+                   VerticalAlignment="Top" HorizontalAlignment="Left"/>
+
+        <TextBox x:Name="CreatePassportField"
+                 Margin="10,130,0,0"
+                 Width="250" Height="20"
+                 VerticalAlignment="Top" HorizontalAlignment="Left"/>
+        <TextBlock Text="Паспорт"
+                   Margin="270,130,0,0" Width="170" Height="20"
+                   VerticalAlignment="Top" HorizontalAlignment="Left"/>
+
+        <ComboBox x:Name="CreateInDepartmentBox" 
+                  Margin="0,160,10,0" Width="200" Height="20"
+                  VerticalAlignment="Top" HorizontalAlignment="Center" SelectionChanged="CreateInDepartmentButton"/>
+
+        <Button Margin="0,190,0,0"
+                VerticalAlignment="Top" HorizontalAlignment="Center"
+                Content="Добавить сотрудника" Click="CreateButton"/>
+    </Grid>
+</Window>

@@ -6,8 +6,9 @@ using System.Threading.Tasks;
 
 namespace HW10
 {
-    internal class Client
+    internal class Worker
     {
+        //private byte workerID = 0;
         private string firstName = "";
         private string secondName = "";
         private string middleName = "";
@@ -30,32 +31,68 @@ namespace HW10
         public string UserType { get { return userType; } set { userType = value; } }
         public string Log { get { return log; } set { log = value; } }
 
-        private int number;
+        public int number;
         private static int count = 0;
 
-        public Client()
+        public Worker()
         {
             number = ++count;
-            SecondName = $"Фами{count}лия";
-            FirstName = $"И{count}мя";
-            MiddleName = $"Отче{count}ство";
-            Phone = $"Теле{count}фон";
-            Passport = $"Пас{count}порт";
+            SecondName = $"Фамилия {count}";
+            FirstName = $"Имя {count}";
+            MiddleName = $"Отчество {count}";
+            Phone = GeneratePhone();
+            Passport = GeneratePassport();
 
             date = DateTime.Now;
         }
 
-        public override string ToString()
+        public Worker(string secondName, string firstName, string middleName, string phone, string passport)
         {
-            return $"Клиент №{number}";
+            number = ++count;
+            SecondName = secondName;
+            FirstName = firstName;
+            MiddleName = middleName;
+            Phone = phone;
+            Passport = passport;
+
+            date = DateTime.Now;
         }
 
-        public string ShowClient(string firstName, string secondName, string middleName, string phone, string passport)
+        private string GeneratePhone()
+        {
+            string phone = "891";
+            Random random = new Random();
+
+            for (int i = 0; i < 8; i++)
+            {
+                phone += random.Next(0, 10);
+            }
+            return phone;
+        }
+
+        private string GeneratePassport()
+        {
+            string passport = "";
+            Random random = new Random();
+
+            for (int i = 0; i < 8; i++)
+            {
+                passport += random.Next(0, 10);
+            }
+            return passport;
+        }
+
+        public override string ToString()
+        {
+            return $"Сотрудник №{number}";
+        }        
+
+        public string ShowWorker(string firstName, string secondName, string middleName, string phone, string passport)
         {            
             return $"{secondName} \n{firstName} \n{middleName} \n\n{phone} \n\n{passport}";
         }
 
-        public string ShowClientLog(DateTime date, string type, IClientEditor user, string before)
+        public string ShowWorkerLog(DateTime date, string type, IWorkerEditor user, string before)
         {
             log = $"{date} \n{user.GetType()} \nИзменил {type} на: {before}";
             return log;
