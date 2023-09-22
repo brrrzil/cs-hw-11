@@ -1,4 +1,5 @@
 ﻿using System;
+using System.ComponentModel;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -8,7 +9,6 @@ namespace HW10
 {
     internal class Worker
     {
-        //private byte workerID = 0;
         private string firstName = "";
         private string secondName = "";
         private string middleName = "";
@@ -30,6 +30,7 @@ namespace HW10
         public string Before { get { return before; } set { before = value; } }
         public string UserType { get { return userType; } set { userType = value; } }
         public string Log { get { return log; } set { log = value; } }
+        public string DisplayName;
 
         public int number;
         private static int count = 0;
@@ -42,6 +43,7 @@ namespace HW10
             MiddleName = $"Отчество {count}";
             Phone = GeneratePhone();
             Passport = GeneratePassport();
+            DisplayName = $"Сотрудник №{number}";
 
             date = DateTime.Now;
         }

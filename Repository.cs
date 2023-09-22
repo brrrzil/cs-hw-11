@@ -9,10 +9,5 @@ namespace HW10
     {
         private static ObservableCollection<Department> departments = new ObservableCollection<Department>();
         public static ObservableCollection<Department> Departments { get { return departments; } set { value = departments; } }
-
-        //public Repository()
-        //{
-        //    Departments = new ObservableCollection<Department>();
-        //}
     }
 }

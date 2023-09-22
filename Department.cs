@@ -1,4 +1,5 @@
 ﻿using System;
+using System.ComponentModel;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.Linq;
@@ -13,6 +14,9 @@ namespace HW10
         private string name;
 
         private ObservableCollection<Worker> dep = new ObservableCollection<Worker>();
+
+        BindingList<Worker> workers = new BindingList<Worker>();
+
         public ObservableCollection<Worker> Dep { get { return dep; } set { dep = value; } }
 
         public Department(int ammount)
@@ -22,7 +26,7 @@ namespace HW10
 
             for (int i = 0; i < ammount; i++)
             {
-                dep.Add(new Worker());                
+                dep.Add(new Worker());
             }
         }
 
@@ -31,16 +35,16 @@ namespace HW10
             return this.name;
         }
 
-        public List<string> WorkersList()
+        public ObservableCollection<Worker> WorkersList()
         {
-            List<string> workersList = new List<string>();
+            ObservableCollection<Worker> workersList = new ObservableCollection<Worker>();
 
             foreach (Worker worker in Dep)
             {
-                workersList.Add(worker.ToString());
+                workersList.Add(worker);
             }
             return workersList;
-        }
+        }        
 
         public void AddNewWorker( string secondName, string firstName, string middleName, string passport, string phone)
         {
