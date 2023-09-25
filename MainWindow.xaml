@@ -30,24 +30,13 @@
                   Margin="0,40,10,0" Width="200" Height="20"
                   VerticalAlignment="Top" HorizontalAlignment="Right" SelectionChanged="ShowDepartmentWorkers"/>
 
-        <DataGrid Grid.Column="0" x:Name="WorkerGrid" IsReadOnly="True"   
+        <DataGrid Grid.Column="0" x:Name="WorkerGrid" IsReadOnly="True"
                   AutoGenerateColumns="False" GridLinesVisibility="Horizontal"
                   Margin="10,70,10,10" Grid.ColumnSpan="2" Grid.RowSpan="2">
             <DataGrid.Columns>
-                <DataGridTextColumn Header="Сотрудник" Binding="{Binding Path=DisplayName}"/>
+                <DataGridTextColumn Header="Сотрудник" Binding="{Binding Path = DisplayName}"/>
             </DataGrid.Columns>
         </DataGrid>
-
-        <!--<ListView x:Name="WorkerGrid" ItemsSource="{Binding WorkerListView}"
-                  Grid.ColumnSpan="2" Grid.RowSpan="2"
-                  Margin="10, 70, 10, 10">
-            <ListView.View>
-                <GridView>
-                    <GridViewColumn Header="Сотрудник" DisplayMemberBinding="{Binding DisplayName}">                        
-                    </GridViewColumn>
-                </GridView>
-            </ListView.View>
-        </ListView> -->
 
         <TextBlock Grid.Column="2" Grid.Row="0" x:Name="WorkerInfo"
                    Margin="10,10,10,10"

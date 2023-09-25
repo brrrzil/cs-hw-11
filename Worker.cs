@@ -14,12 +14,14 @@ namespace HW10
         private string middleName = "";
         private string phone = "";
         private string passport = "";
+        private string displayName = "";
 
         public string FirstName { get { return firstName; } set { firstName = value; } }
         public string SecondName { get { return secondName; } set { secondName = value; } }
         public string MiddleName { get { return middleName; } set { middleName = value; } }
         public string Phone { get { return phone; } set { phone = value; } }
         public string Passport { get { return passport; } set { this.passport = value.Length > 6 ? value.Substring(0, 6) : value; } }
+        public string DisplayName { get; set; }
 
         private DateTime date = DateTime.Now;
         private string userType = "";
@@ -30,7 +32,6 @@ namespace HW10
         public string Before { get { return before; } set { before = value; } }
         public string UserType { get { return userType; } set { userType = value; } }
         public string Log { get { return log; } set { log = value; } }
-        public string DisplayName;
 
         public int number;
         private static int count = 0;
@@ -56,6 +57,7 @@ namespace HW10
             MiddleName = middleName;
             Phone = phone;
             Passport = passport;
+            DisplayName = $"Сотрудник №{number}";
 
             date = DateTime.Now;
         }

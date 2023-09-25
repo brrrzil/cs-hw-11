@@ -38,17 +38,11 @@ namespace HW10
 
         public void EditMiddleName(Worker worker, string workerMiddleName) { MessageBox.Show("Недостаточно прав для редактирования этого поля"); }
 
-        public void EditPhone(Worker worker, string workerPhone)
-        {
-            worker.Phone = workerPhone;
-        }
+        public void EditPhone(Worker worker, string workerPhone) { worker.Phone = workerPhone; }
 
         public void EditPassport() { MessageBox.Show("Недостаточно прав для редактирования этого поля"); }
 
-        public string Log(Worker worker)
-        {
-            return "";
-        }
+        public string Log(Worker worker) { return ""; }
         #endregion
     }
 }

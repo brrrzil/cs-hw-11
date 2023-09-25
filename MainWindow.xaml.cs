@@ -21,21 +21,20 @@ namespace HW10
     /// <summary>
     /// Interaction logic for MainWindow.xaml
     /// </summary>
-    public partial class MainWindow : Window 
+    public partial class MainWindow : Window, INotifyPropertyChanged
     {
         IWorkerEditor user = new User();
+
+        public event PropertyChangedEventHandler? PropertyChanged;
 
         public MainWindow()
         {
             InitializeComponent();
 
-            //DataContext = new YourViewModel();
-
             // Добавляем двух пользователей в ComboBox
             User.AddUser("Консультант");
             User.AddUser("Менеджер");
             UserBox.ItemsSource = User.GetUsers();
-            Repository repository = new Repository();
 
             //Создаём отделы
             Repository.Departments.Add(new Department(10));
@@ -52,12 +51,9 @@ namespace HW10
         // По клику на департаменте выводим список сотрудников
         private void ShowDepartmentWorkers(object sender, SelectionChangedEventArgs e)
         {
-            if (DepartmentBox.SelectedIndex != -1)
-            {
-                WorkerGrid.ItemsSource = Repository.Departments[DepartmentBox.SelectedIndex].WorkersList();
-            }
+            WorkerGrid.ItemsSource = Repository.Departments[DepartmentBox.SelectedIndex].WorkersList();
         }
-        
+
         // По клику на сотруднике выводим инфо в TextBox
         private void ShowWorkerInfo(object sender, MouseButtonEventArgs e)
         {
